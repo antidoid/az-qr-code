@@ -1,0 +1,17 @@
+{
+  "packages": [
+    "azure-functions-core-tools@latest",
+    "python@3.11",
+    "stdenv.cc.cc.lib"
+  ],
+  "shell": {
+    "init_hook": [
+      "echo 'Welcome to devbox!' > /dev/null"
+    ],
+    "scripts": {
+      "test": [
+        "echo \"Error: no test specified\" && exit 1"
+      ]
+    }
+  }
+}

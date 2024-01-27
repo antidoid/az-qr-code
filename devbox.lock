@@ -1,0 +1,47 @@
+{
+  "lockfile_version": "1",
+  "packages": {
+    "azure-functions-core-tools@latest": {
+      "last_modified": "2024-01-18T00:05:01Z",
+      "resolved": "github:NixOS/nixpkgs/921fb3319c2a296fc65048272d22f3db889d7292#azure-functions-core-tools",
+      "source": "devbox-search",
+      "version": "4.0.5455",
+      "systems": {
+        "aarch64-darwin": {
+          "store_path": "/nix/store/2wih8j132mj3pryr0vkbd5r4ja5g8fkg-azure-functions-core-tools-4.0.5455"
+        },
+        "x86_64-darwin": {
+          "store_path": "/nix/store/2sdh5hyh3z6ibfr8frss4nrwa7g2nz5b-azure-functions-core-tools-4.0.5455"
+        },
+        "x86_64-linux": {
+          "store_path": "/nix/store/pjdnc9h7cnc9jnpdmdkq847f7bpk54iy-azure-functions-core-tools-4.0.5455"
+        }
+      }
+    },
+    "python@3.11": {
+      "last_modified": "2024-01-14T03:55:27Z",
+      "plugin_version": "0.0.3",
+      "resolved": "github:NixOS/nixpkgs/dd5621df6dcb90122b50da5ec31c411a0de3e538#python3",
+      "source": "devbox-search",
+      "version": "3.11.7",
+      "systems": {
+        "aarch64-darwin": {
+          "store_path": "/nix/store/al81jk4wz596q8if684x6a9mqlv7vc3z-python3-3.11.7"
+        },
+        "aarch64-linux": {
+          "store_path": "/nix/store/1dv5m71dgl6n8dxd7riqjz094vqmyws8-python3-3.11.7"
+        },
+        "x86_64-darwin": {
+          "store_path": "/nix/store/six35arbsdi3zw9278xvq3zh647sx6ik-python3-3.11.7"
+        },
+        "x86_64-linux": {
+          "store_path": "/nix/store/asiphbpiy2gmidfm3xbwcikayhs66289-python3-3.11.7"
+        }
+      }
+    },
+    "stdenv.cc.cc.lib": {
+      "resolved": "github:NixOS/nixpkgs/75a52265bda7fd25e06e3a67dee3f0354e73243c#stdenv.cc.cc.lib",
+      "source": "nixpkg"
+    }
+  }
+}
