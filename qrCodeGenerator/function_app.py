@@ -1,12 +1,16 @@
 import azure.functions as func
-import json
 from azure.storage.blob import BlobServiceClient
+
 import qrcode
-from qrcode.image.pure import PyPNGImage
-from qrcode.image.svg import SvgImage
+from qrcode.image.styledpil import StyledPilImage
+from qrcode.image.styles.moduledrawers.pil import *
+from qrcode.image.styles.colormasks import SolidFillColorMask
+
+
 import os
 import re
 import io
+import json
 
 app = func.FunctionApp()
 connectionString = os.environ["STORAGE_CONNECTION_STRING"]
@@ -15,7 +19,8 @@ connectionString = os.environ["STORAGE_CONNECTION_STRING"]
 @app.route(route="GenerateQRCode", auth_level=func.AuthLevel.ANONYMOUS)
 def GenerateQRCode(req: func.HttpRequest) -> func.HttpResponse:
     url = req.params.get('url') or req.get_json().get('url')
-    imgType = req.params.get('imgType') or req.get_json().get('imgType')
+    style = req.params.get('style') or req.get_json().get('style')
+    color = req.params.get('color') or req.get_json().get('color')
 
     if not url:
         return func.HttpResponse(
@@ -23,11 +28,18 @@ def GenerateQRCode(req: func.HttpRequest) -> func.HttpResponse:
             status_code=400
         )
 
-    # Generate the qrcode
     try:
-        qrCodeData = qrcode.make(
-            url,
-            image_factory=PyPNGImage if imgType == "png" else SvgImage
+        # Generate the qrcode
+        qr = qrcode.QRCode(error_correction=qrcode.constants.ERROR_CORRECT_L)
+        qr.add_data(url)
+
+        qrCodeData = qr.make_image(
+            image_factory=StyledPilImage,
+            module_drawer=getModuleDrawer(style),
+            color_mask=SolidFillColorMask(
+                front_color=getRGBValue(color),
+                back_color=(255, 255, 255)
+            )
         )
 
         # create a blob client
@@ -40,7 +52,7 @@ def GenerateQRCode(req: func.HttpRequest) -> func.HttpResponse:
 
         # use regex to remove https:// from the url
         modifiedUrl = re.sub(r'^https?://', '', url)
-        blobName = modifiedUrl + f".{imgType}"
+        blobName = modifiedUrl + ".png"
         blobClient = containerClient.get_blob_client(blobName)
 
         # Converting qrcode data to bytes
@@ -59,3 +71,35 @@ def GenerateQRCode(req: func.HttpRequest) -> func.HttpResponse:
         )
     except Exception as e:
         return func.HttpResponse(status_code=500, body=f"Error: {e}")
+
+
+def getRGBValue(color):
+    match color:
+        case "red":
+            return (226, 29, 29)
+        case "green":
+            return (34, 165, 63)
+        case "blue":
+            return (10, 2, 99)
+        case "yellow":
+            return (255, 157, 11)
+        case _:
+            return (0, 0, 0)
+
+
+def getModuleDrawer(drawerName):
+    match drawerName:
+        case "sq":
+            return SquareModuleDrawer()
+        case "gapped-sq":
+            return GappedSquareModuleDrawer()
+        case "circle":
+            return CircleModuleDrawer()
+        case "rounded":
+            return RoundedModuleDrawer()
+        case "vertical":
+            return VerticalBarsDrawer()
+        case "horizontal":
+            return HorizontalBarsDrawer()
+        case _:
+            return SquareModuleDrawer()
