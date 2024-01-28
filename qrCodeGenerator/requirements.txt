@@ -1,3 +1,3 @@
 azure-storage-blob
-qrcode
+qrcode[pil]
 azure-functions
