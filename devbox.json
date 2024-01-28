@@ -2,6 +2,7 @@
   "packages": [
     "azure-functions-core-tools@latest",
     "python@3.11",
+    "azure-cli@latest",
     "stdenv.cc.cc.lib"
   ],
   "shell": {

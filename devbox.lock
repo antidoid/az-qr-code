@@ -1,6 +1,26 @@
 {
   "lockfile_version": "1",
   "packages": {
+    "azure-cli@latest": {
+      "last_modified": "2024-01-19T03:40:24Z",
+      "resolved": "github:NixOS/nixpkgs/4471857c0a4a8a0ffc7bdbeaf1b998746ce12a82#azure-cli",
+      "source": "devbox-search",
+      "version": "2.55.0",
+      "systems": {
+        "aarch64-darwin": {
+          "store_path": "/nix/store/7w15qki739w7byy2mfi6vkzd2vsnakj8-python3.11-azure-cli-2.55.0"
+        },
+        "aarch64-linux": {
+          "store_path": "/nix/store/6hzqw8lk3r8dgipdb48w88n4lyr3mwxy-python3.11-azure-cli-2.55.0"
+        },
+        "x86_64-darwin": {
+          "store_path": "/nix/store/7x7wggd839g07fm7vzj3cl7jg60a9d2f-python3.11-azure-cli-2.55.0"
+        },
+        "x86_64-linux": {
+          "store_path": "/nix/store/mpdbhvykiywxzhab3f1vrhiz99zkka50-python3.11-azure-cli-2.55.0"
+        }
+      }
+    },
     "azure-functions-core-tools@latest": {
       "last_modified": "2024-01-18T00:05:01Z",
       "resolved": "github:NixOS/nixpkgs/921fb3319c2a296fc65048272d22f3db889d7292#azure-functions-core-tools",
