@@ -5,7 +5,7 @@ export default function Hero() {
                 Ahoy, Stranger
             </span>
             <span className="text-xl sm:text-3xl font-semibold text-center">
-                Create & Customize your dynamic QR Code for FREE
+                Create & Customize your dynamic QR Codes for FREE
             </span>
         </div>
     );
