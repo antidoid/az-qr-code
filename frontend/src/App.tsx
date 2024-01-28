@@ -1,9 +1,11 @@
+import { Header, Hero } from "./containers";
 import "./App.css";
 
 function App() {
   return (
     <div>
-      <h1>Hello from azure qr code generator</h1>
+      <Header />
+      <Hero />
     </div>
   );
 }
