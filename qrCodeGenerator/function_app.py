@@ -3,6 +3,7 @@ import json
 from azure.storage.blob import BlobServiceClient
 import qrcode
 from qrcode.image.pure import PyPNGImage
+from qrcode.image.svg import SvgImage
 import os
 import re
 import io
@@ -14,6 +15,7 @@ connectionString = os.environ["STORAGE_CONNECTION_STRING"]
 @app.route(route="GenerateQRCode", auth_level=func.AuthLevel.ANONYMOUS)
 def GenerateQRCode(req: func.HttpRequest) -> func.HttpResponse:
     url = req.params.get('url') or req.get_json().get('url')
+    imgType = req.params.get('imgType') or req.get_json().get('imgType')
 
     if not url:
         return func.HttpResponse(
@@ -23,7 +25,10 @@ def GenerateQRCode(req: func.HttpRequest) -> func.HttpResponse:
 
     # Generate the qrcode
     try:
-        qrCodeData = qrcode.make(url, image_factory=PyPNGImage)
+        qrCodeData = qrcode.make(
+            url,
+            image_factory=PyPNGImage if imgType == "png" else SvgImage
+        )
 
         # create a blob client
         blobServiceClient = BlobServiceClient.from_connection_string(
@@ -35,7 +40,7 @@ def GenerateQRCode(req: func.HttpRequest) -> func.HttpResponse:
 
         # use regex to remove https:// from the url
         modifiedUrl = re.sub(r'^https?://', '', url)
-        blobName = modifiedUrl + '.png'
+        blobName = modifiedUrl + f".{imgType}"
         blobClient = containerClient.get_blob_client(blobName)
 
         # Converting qrcode data to bytes
