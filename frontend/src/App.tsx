@@ -16,7 +16,8 @@ function App() {
   useEffect(() => {
     // Add query params to request url as users fill the form
     setRequestUrl(
-      `${import.meta.env.VITE_FUNCTION_URL
+      `${
+        import.meta.env.VITE_FUNCTION_URL
       }?url=${qrCodeUrl}&color=${color}&style=${style}`,
     );
   }, [qrCodeUrl, color, style]);
@@ -30,8 +31,6 @@ function App() {
       console.log(error);
     }
   };
-
-  console.log(requesturl);
 
   return (
     <div className="min-h-screen flex flex-col">

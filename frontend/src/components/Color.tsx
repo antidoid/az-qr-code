@@ -9,7 +9,7 @@ export default function Color({
 }) {
   return (
     <div
-      className={`w-12 h-12 mr-3 rounded-xl ${background} color-red cursor-pointer hover:border-4 hover:border-teal-200 ${
+      className={`w-12 h-12 mr-3 rounded-xl ${background} cursor-pointer hover:border-4 hover:border-teal-200 ${
         isSelected && "border-4 border-teal-200"
       }`}
       onClick={setIsSelected}

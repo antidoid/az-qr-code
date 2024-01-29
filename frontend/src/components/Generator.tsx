@@ -21,7 +21,7 @@ export default function Generator({
 }: GeneratorProps) {
   const [currentSelectedColor, setCurrentSelectedColor] = useState<Number>(0);
 
-  const colors = ["black", "red", "green", "green", "yellow"];
+  const colors = ["black", "red", "green", "blue", "yellow"];
   const colorElements = colors.map((color: string, index: Number) => {
     return (
       <Color
