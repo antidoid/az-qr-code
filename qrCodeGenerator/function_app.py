@@ -89,9 +89,9 @@ def getRGBValue(color):
 
 def getModuleDrawer(drawerName):
     match drawerName:
-        case "sq":
+        case "square":
             return SquareModuleDrawer()
-        case "gapped-sq":
+        case "gapped-square":
             return GappedSquareModuleDrawer()
         case "circle":
             return CircleModuleDrawer()
