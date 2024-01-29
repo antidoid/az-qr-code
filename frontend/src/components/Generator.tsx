@@ -48,6 +48,8 @@ export default function Generator({
         onChange={(e) => setQRCodeUrl(e.target.value)}
       />
       <div className="flex flex-col">
+        {/*The below block fixes a bug where the colors don't render*/}
+        <div className="bg-red bg-blue bg-green bg-yellow"></div>
         <p className="text-xl mt-3">Color</p>
         <div className="mt-3 flex">{colorElements}</div>
       </div>
