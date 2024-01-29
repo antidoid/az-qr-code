@@ -52,7 +52,7 @@ def GenerateQRCode(req: func.HttpRequest) -> func.HttpResponse:
 
         # use regex to remove https:// from the url
         modifiedUrl = re.sub(r'^https?://', '', url)
-        blobName = modifiedUrl + ".png"
+        blobName = f"{modifiedUrl}-{style}-{color}.png"
         blobClient = containerClient.get_blob_client(blobName)
 
         # Converting qrcode data to bytes
@@ -61,8 +61,9 @@ def GenerateQRCode(req: func.HttpRequest) -> func.HttpResponse:
         buffer.seek(0)
         qrcodeInBytes = buffer.read()
 
-        # Upload the qrcode to blob container
-        blobClient.upload_blob(qrcodeInBytes)
+        # Upload the qrcode to blob container if it already doesn't exists
+        if not blobClient.exists():
+            blobClient.upload_blob(qrcodeInBytes)
 
         return func.HttpResponse(
             status_code=200,
