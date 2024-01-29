@@ -1,4 +1,5 @@
 import Color from "./Color";
+import Style from "./Style";
 
 export default function Generator() {
   return (
@@ -10,9 +11,20 @@ export default function Generator() {
         placeholder="https://antiderivative.live"
         className="w-4/5 mt-3 rounded-lg border border-black p-3"
       />
-      <div className="mt-3 flex">
-        <Color color="lolared" />
+      <div className="flex flex-col">
+        <p className="text-xl mt-3">Color</p>
+        <div className="mt-3 flex">
+          <Color background="bg-black" />
+          <Color background="bg-red" />
+          <Color background="bg-green" />
+          <Color background="bg-blue" />
+          <Color background="bg-yellow" />
+        </div>
       </div>
+      <Style />
+      <button className="p-3 w-36 bg-black text-white rounded-xl mt-3">
+        Download
+      </button>
     </div>
   );
 }

@@ -7,13 +7,11 @@ export default {
         "hero-doodle": "url(/src/assets/hero-bg.jpg)",
       },
       colors: {
-        lolared: "#E21D1D",
+        red: "rgb(226, 29, 29)",
+        green: "rgb(34, 165, 63)",
+        blue: "rgb(10, 2, 99)",
+        yellow: "rgb(255, 157, 11)",
       },
-      // backgroundImage: {
-      //   green: "rgba(34, 165, 63, 1)",
-      //   blue: "rgba(10, 2, 99, 1)",
-      //   yellow: "rgba(255, 157, 11, 1)",
-      // },
     },
   },
   plugins: [],
