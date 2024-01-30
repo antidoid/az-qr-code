@@ -9,13 +9,23 @@ export default function QRCode({
   isLoading: boolean;
 }) {
   return (
-    <div className="basis-1/2 p-4 sm:p-0 flex items-center justify-center bg-[#F4F4F4] relative">
+    <div className="basis-1/2 p-4 sm:p-0 flex flex-col items-center justify-center bg-[#F4F4F4] relative">
       {isLoading && <Spinner />}
       <img
         src={imgUrl || DefaultImage}
         className={!isLoading && imgUrl ? "" : "blur " + "z-0"}
         alt="QRCode"
       ></img>
+      {imgUrl && (
+        <form method="get" action={imgUrl}>
+          <button
+            type="submit"
+            className="py-2.5 w-36 h-13 text-xl font-semibold bg-black text-white rounded-xl mt-3 hover:opacity-80"
+          >
+            Download
+          </button>
+        </form>
+      )}
     </div>
   );
 }

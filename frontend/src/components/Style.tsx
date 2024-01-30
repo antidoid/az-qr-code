@@ -14,7 +14,7 @@ export default function Style({
       </label>
       <select
         id="styles"
-        className="w-3/5 p-3 bg-gray-100 text-gray-900 rounded-lg mt-2 cursor-pointer"
+        className="sm:w-3/5 p-3 bg-gray-100 text-gray-900 rounded-lg mt-2 cursor-pointer"
         value={style}
         onChange={(e) => setStyle(e.target.value)}
       >

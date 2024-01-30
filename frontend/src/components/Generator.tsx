@@ -39,13 +39,13 @@ export default function Generator({
   });
 
   return (
-    <div className="basis-1/2 p-4 sm:p-10">
+    <div className="basis-1/2 flex flex-col p-4 sm:p-10">
       <h2 className="text-3xl font-semibold">Generate QR Code</h2>
       <p className="mt-3 text-xl">Enter or paste URL :</p>
       <input
         type="url"
         placeholder="https://antiderivative.live"
-        className="w-4/5 mt-3 rounded-lg border border-black p-3"
+        className="w-full sm:w-3/5 mt-3 rounded-lg border border-black p-3"
         value={qrCodeUrl}
         onChange={(e) => setQRCodeUrl(e.target.value)}
       />
@@ -58,7 +58,7 @@ export default function Generator({
       <Style style={style} setStyle={setStyle} />
       <button
         onClick={handleDownloadBtn}
-        className="py-2.5 w-36 h-13 text-xl font-semibold bg-black text-white rounded-xl mt-3 hover:opacity-80 disabled:hover:opacity-100 disabled:bg-slate-400 disabled:text-gray-200"
+        className="self-center sm:self-start py-2.5 w-36 h-13 text-xl font-semibold bg-black text-white rounded-xl mt-3 hover:opacity-80 disabled:hover:opacity-100 disabled:bg-slate-400 disabled:text-gray-200"
         disabled={isLoading || !qrCodeUrl}
       >
         Generate
