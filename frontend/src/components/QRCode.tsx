@@ -13,7 +13,7 @@ export default function QRCode({
       {isLoading && <Spinner />}
       <img
         src={imgUrl || DefaultImage}
-        className={!isLoading && imgUrl ? "" : "blur " + "z-0"}
+        className={(!isLoading && imgUrl ? "" : "blur ") + "z-0 w-72"}
         alt="QRCode"
       ></img>
       {imgUrl && (
