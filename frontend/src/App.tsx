@@ -11,13 +11,12 @@ function App() {
   const [color, setColor] = useState("black");
   const [style, setStyle] = useState("square");
 
-  const [imgUrl, setImgUrl] = useState(import.meta.env.VITE_DEFAULT_QR_CODE);
+  const [imgUrl, setImgUrl] = useState("");
 
   useEffect(() => {
     // Add query params to request url as users fill the form
     setRequestUrl(
-      `${
-        import.meta.env.VITE_FUNCTION_URL
+      `${import.meta.env.VITE_FUNCTION_URL
       }?url=${qrCodeUrl}&color=${color}&style=${style}`,
     );
   }, [qrCodeUrl, color, style]);
