@@ -6,12 +6,13 @@ import { useEffect, useState } from "react";
 
 function App() {
   const [requesturl, setRequestUrl] = useState("");
+  const [imgUrl, setImgUrl] = useState("");
 
   const [qrCodeUrl, setQRCodeUrl] = useState("");
   const [color, setColor] = useState("black");
   const [style, setStyle] = useState("square");
 
-  const [imgUrl, setImgUrl] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     // Add query params to request url as users fill the form
@@ -22,6 +23,7 @@ function App() {
   }, [qrCodeUrl, color, style]);
 
   const handleDownloadBtn = async () => {
+    setIsLoading(true);
     try {
       const res = await fetch(requesturl);
       const { qr_code_url: imgLink } = await res.json();
@@ -29,6 +31,7 @@ function App() {
     } catch (error) {
       console.log(error);
     }
+    setIsLoading(false);
   };
 
   return (
@@ -36,7 +39,7 @@ function App() {
       <Header />
       <Hero />
       <main className="flex-1 flex flex-col-reverse sm:flex-row h-96">
-        <QRCode imgUrl={imgUrl} />
+        <QRCode imgUrl={imgUrl} isLoading={isLoading} />
         <Generator
           qrCodeUrl={qrCodeUrl}
           setQRCodeUrl={setQRCodeUrl}
@@ -44,6 +47,7 @@ function App() {
           style={style}
           setStyle={setStyle}
           handleDownloadBtn={handleDownloadBtn}
+          isLoading={isLoading}
         />
       </main>
       <Footer />

@@ -9,6 +9,7 @@ type GeneratorProps = {
   style: string;
   setStyle: React.Dispatch<React.SetStateAction<string>>;
   handleDownloadBtn: () => {};
+  isLoading: boolean;
 };
 
 export default function Generator({
@@ -18,6 +19,7 @@ export default function Generator({
   style,
   setStyle,
   handleDownloadBtn,
+  isLoading,
 }: GeneratorProps) {
   const [currentSelectedColor, setCurrentSelectedColor] = useState<Number>(0);
 
@@ -56,7 +58,8 @@ export default function Generator({
       <Style style={style} setStyle={setStyle} />
       <button
         onClick={handleDownloadBtn}
-        className="p-3 w-36 bg-black text-white rounded-xl mt-3"
+        className="py-2.5 w-36 h-13 text-xl font-semibold bg-black text-white rounded-xl mt-3 hover:opacity-80 disabled:hover:opacity-100 disabled:bg-slate-400 disabled:text-gray-200"
+        disabled={isLoading || !qrCodeUrl}
       >
         Generate
       </button>
