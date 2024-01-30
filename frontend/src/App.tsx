@@ -25,6 +25,14 @@ function App() {
 
   const handleDownloadBtn = async () => {
     setIsLoading(true);
+
+    // Scroll to bottom of the page on mobile devices
+    if (window.innerWidth < 640)
+      window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: "smooth",
+      });
+
     try {
       const res = await fetch(requesturl);
       const { qr_code_url: imgLink } = await res.json();
