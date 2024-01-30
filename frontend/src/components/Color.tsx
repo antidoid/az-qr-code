@@ -5,14 +5,13 @@ export default function Color({
 }: {
   background: string;
   isSelected: boolean;
-  setIsSelected: React.Dispatch<React.SetStateAction<Number>>;
+  setIsSelected: React.Dispatch<React.SetStateAction<void>>;
 }) {
   return (
     <div
-      className={`w-12 h-12 mr-3 rounded-xl ${background} cursor-pointer hover:border-4 hover:border-teal-200 ${
-        isSelected && "border-4 border-teal-200"
-      }`}
-      onClick={setIsSelected}
+      className={`w-12 h-12 mr-3 rounded-xl ${background} cursor-pointer hover:border-4 hover:border-teal-200 ${isSelected && "border-4 border-teal-200"
+        }`}
+      onClick={() => setIsSelected()}
     ></div>
   );
 }
