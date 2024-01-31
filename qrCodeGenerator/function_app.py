@@ -55,14 +55,14 @@ def GenerateQRCode(req: func.HttpRequest) -> func.HttpResponse:
         blobName = f"{modifiedUrl}-{style}-{color}.png"
         blobClient = containerClient.get_blob_client(blobName)
 
-        # Converting qrcode data to bytes
-        buffer = io.BytesIO()
-        qrCodeData.save(buffer)
-        buffer.seek(0)
-        qrcodeInBytes = buffer.read()
-
         # Upload the qrcode to blob container if it already doesn't exists
         if not blobClient.exists():
+            # Converting qrcode data to bytes
+            buffer = io.BytesIO()
+            qrCodeData.save(buffer)
+            buffer.seek(0)
+            qrcodeInBytes = buffer.read()
+
             blobClient.upload_blob(qrcodeInBytes)
 
         return func.HttpResponse(
