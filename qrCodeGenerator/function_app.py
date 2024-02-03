@@ -29,19 +29,6 @@ def GenerateQRCode(req: func.HttpRequest) -> func.HttpResponse:
         )
 
     try:
-        # Generate the qrcode
-        qr = qrcode.QRCode(error_correction=qrcode.constants.ERROR_CORRECT_L)
-        qr.add_data(url)
-
-        qrCodeData = qr.make_image(
-            image_factory=StyledPilImage,
-            module_drawer=getModuleDrawer(style),
-            color_mask=SolidFillColorMask(
-                front_color=getRGBValue(color),
-                back_color=(255, 255, 255)
-            )
-        )
-
         # create a blob client
         blobServiceClient = BlobServiceClient.from_connection_string(
             conn_str=connectionString)
@@ -55,14 +42,29 @@ def GenerateQRCode(req: func.HttpRequest) -> func.HttpResponse:
         blobName = f"{modifiedUrl}-{style}-{color}.png"
         blobClient = containerClient.get_blob_client(blobName)
 
-        # Upload the qrcode to blob container if it already doesn't exists
+        # Check if the blob with same name already exists
         if not blobClient.exists():
+            # Generate the qrcode
+            qr = qrcode.QRCode(
+                error_correction=qrcode.constants.ERROR_CORRECT_L)
+            qr.add_data(url)
+
+            qrCodeData = qr.make_image(
+                image_factory=StyledPilImage,
+                module_drawer=getModuleDrawer(style),
+                color_mask=SolidFillColorMask(
+                    front_color=getRGBValue(color),
+                    back_color=(255, 255, 255)
+                )
+            )
+
             # Converting qrcode data to bytes
             buffer = io.BytesIO()
             qrCodeData.save(buffer)
             buffer.seek(0)
             qrcodeInBytes = buffer.read()
 
+            # Upload the blob
             blobClient.upload_blob(qrcodeInBytes)
 
         return func.HttpResponse(
