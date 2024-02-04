@@ -8,13 +8,11 @@ from qrcode.image.styles.moduledrawers.pil import *
 from qrcode.image.styles.colormasks import SolidFillColorMask
 
 
-import os
 import re
 import io
 import json
 
 app = func.FunctionApp()
-connectionString = os.environ["STORAGE_CONNECTION_STRING"]
 
 
 @app.route(route="GenerateQRCode", auth_level=func.AuthLevel.ANONYMOUS)
