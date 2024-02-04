@@ -1,5 +1,6 @@
 import azure.functions as func
 from azure.storage.blob import BlobServiceClient
+from azure.identity import DefaultAzureCredential
 
 import qrcode
 from qrcode.image.styledpil import StyledPilImage
@@ -22,6 +23,7 @@ def GenerateQRCode(req: func.HttpRequest) -> func.HttpResponse:
     style = req.params.get('style') or req.get_json().get('style')
     color = req.params.get('color') or req.get_json().get('color')
 
+    # return error response if url was not provided in the query param / req body
     if not url:
         return func.HttpResponse(
             "Please pass a url on the query string or the request body",
@@ -29,11 +31,18 @@ def GenerateQRCode(req: func.HttpRequest) -> func.HttpResponse:
         )
 
     try:
+        # Create a Managed Identity default credential
+        credential = DefaultAzureCredential()
+
         # create a blob client
-        blobServiceClient = BlobServiceClient.from_connection_string(
-            conn_str=connectionString)
+        blobServiceClient = BlobServiceClient(
+            "https://qrcodegenerator998.blob.core.windows.net", credential)
+
+        # create the blob container client
         containerName = 'qr-codes'
         containerClient = blobServiceClient.get_container_client(containerName)
+
+        # create container if it doesn't already exists
         if not containerClient.exists():
             containerClient = blobServiceClient.create_container(containerName)
 

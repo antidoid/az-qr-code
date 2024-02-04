@@ -1,3 +1,4 @@
 azure-storage-blob
 qrcode[pil]
 azure-functions
+azure-identity
