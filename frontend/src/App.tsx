@@ -14,15 +14,6 @@ function App() {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    // Add query params to request url as users fill the form
-    setRequestUrl(
-      `${
-        import.meta.env.VITE_FUNCTION_URL
-      }?url=${qrCodeUrl}&color=${color}&style=${style}`,
-    );
-  }, [qrCodeUrl, color, style]);
-
   const handleDownloadBtn = async () => {
     setIsLoading(true);
 
@@ -34,6 +25,9 @@ function App() {
       });
 
     try {
+      const requesturl = `${import.meta.env.VITE_FUNCTION_URL
+        }?url=${qrCodeUrl}&color=${color}&style=${style}
+        &code=${import.meta.env.VITE_FUNCTION_API_KEY}`;
       const res = await fetch(requesturl);
       const { qr_code_url: imgLink } = await res.json();
       setImgUrl(imgLink);
