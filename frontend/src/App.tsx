@@ -2,10 +2,9 @@ import { Generator, QRCode } from "./components";
 import { Header, Hero } from "./containers";
 import "./App.css";
 import Footer from "./containers/Footer";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 function App() {
-  const [requesturl, setRequestUrl] = useState("");
   const [imgUrl, setImgUrl] = useState("");
 
   const [qrCodeUrl, setQRCodeUrl] = useState("");
@@ -25,8 +24,9 @@ function App() {
       });
 
     try {
-      const requesturl = `${import.meta.env.VITE_FUNCTION_URL
-        }?url=${qrCodeUrl}&color=${color}&style=${style}
+      const requesturl = `${
+        import.meta.env.VITE_FUNCTION_URL
+      }?url=${qrCodeUrl}&color=${color}&style=${style}
         &code=${import.meta.env.VITE_FUNCTION_API_KEY}`;
       const res = await fetch(requesturl);
       const { qr_code_url: imgLink } = await res.json();
