@@ -42,6 +42,7 @@ jobs:
         run: "cd ./frontend && npm install && npm run build"
         env:
           VITE_FUNCTION_URL: ${{  secrets.VITE_FUNCTION_URL  }}
+          VITE_FUNCTION_API_KEY: ${{  secrets.VITE_FUNCTION_API_KEY  }}
 
       - name: Setup Pages
         uses: actions/configure-pages@v3
