@@ -15,7 +15,7 @@ import json
 app = func.FunctionApp()
 
 
-@app.route(route="GenerateQRCode", auth_level=func.AuthLevel.ANONYMOUS)
+@app.route(route="GenerateQRCode", auth_level=func.AuthLevel.FUNCTION)
 def GenerateQRCode(req: func.HttpRequest) -> func.HttpResponse:
     url = req.params.get('url') or req.get_json().get('url')
     style = req.params.get('style') or req.get_json().get('style')
